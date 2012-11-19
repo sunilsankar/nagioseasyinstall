@@ -1,0 +1,5 @@
+[nagios]
+name=Nagios Complete Installation with Packages
+baseurl=file:///root/Packages/rpms
+enabled=1
+gpgcheck=0
