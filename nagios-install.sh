@@ -106,7 +106,12 @@ chmod 664 /opt/nagios/etc/htpasswd.users
 cd ..
 cd $NRPE
 ./configure --enable-command-args --prefix=$NAGIOSPATH
-make && make install-plugin && make install
+make && make install-plugin && make install && make install-daemon && make install-daemon-config
+cp init-script /etc/init.d/nrpe
+chmod 700 /etc/init.d/nrpe
+echo "only_from = $HOSTIPADDRESS" >> /opt/nagios/etc/nrpe.cfg
+chkconfig nrpe on
+/etc/init.d/nrpe restart
 /etc/init.d/httpd restart
 /etc/init.d/nagios restart
 echo "Nagios and Nagios Plugins installed successfully" > $NAGIOSDIR/nagiosinstall.log
